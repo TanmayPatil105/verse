@@ -1,0 +1,6 @@
+data/io.github.TanmayPatil105.verse.desktop.in
+data/io.github.TanmayPatil105.verse.metainfo.xml.in
+data/io.github.TanmayPatil105.verse.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

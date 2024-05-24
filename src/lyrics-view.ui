@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <template class="LyricsView" parent="AdwBin">
+    <property name="valign">center</property>
+    <property name="child">
+      <object class="GtkBox" id="box">
+        <property name="orientation">vertical</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
+        <property name="margin-top">10px</property>
+        <property name="margin-bottom">10px</property>
+        <property name="margin-start">10px</property>
+        <property name="margin-end">10px</property>
+        <child>
+          <object class="AdwCarousel" id="carousel">
+            <property name="orientation">horizontal</property>
+            <style>
+             <class name="carousel"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStack" id="indicators_stack">
+            <property name="vhomogeneous">False</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
+            <child>
+              <object class="GtkStackPage">
+                <property name="name">dots</property>
+                <property name="child">
+                  <object class="AdwCarouselIndicatorDots">
+                    <property name="carousel">carousel</property>
+                    <property name="orientation" bind-source="carousel" bind-property="orientation" bind-flags="sync-create"/>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </property>
+  </template>
+  <object class="GtkSizeGroup">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="indicators_stack"/>
+    </widgets>
+  </object>
+</interface>
