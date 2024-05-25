@@ -1,4 +1,4 @@
-# view.py
+# lyrics_view.py
 #
 # Copyright 2024 Tanmay Patil <tanmaynpatil105@gmail.com>
 #
@@ -22,9 +22,9 @@ from gi.repository import Gtk
 gi.require_version('WebKit', '6.0')
 from gi.repository import WebKit
 
-from .utils.utils import lyrics_to_html
+from ..utils.utils import lyrics_to_html
 
-@Gtk.Template(resource_path='/io/github/TanmayPatil105/verse/lyrics-view.ui')
+@Gtk.Template(resource_path='/io/github/TanmayPatil105/verse/views/lyrics_view.ui')
 class LyricsView(Adw.Bin):
     __gtype_name__ = 'LyricsView'
 
