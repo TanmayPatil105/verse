@@ -1,4 +1,4 @@
-# How do I Obtain API tokens?
+# How do I obtain API tokens?
 
 ## Spotify
 - Go to your [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
@@ -7,13 +7,13 @@
 - Click `Show Client Secret`.
 
 
-We have our Client ID and Client Secret.
+We have our Client ID and Client Secret.\
 We'll need them to generate the Refresh token.
 
 
 1. Authorize with [scopes](https://developer.spotify.com/documentation/web-api/concepts/authorization#list-of-scopes) and retrieve code parameter
 
-After running the following bash script in your terminal, you'll be redirected to a url "http://localhost:3000/callback?code=O3rnwd...9Ajd"\
+After running the following bash script in your terminal, you'll be redirected to a url `http://localhost:3000/callback?code=O3rnwd...9Ajd` \
 Extract the code parameter from it, we'll need it!
 
 ```bash

@@ -29,8 +29,8 @@ class VersePreferences(Adw.PreferencesDialog):
     refresh_token_row = Gtk.Template.Child()
     genius_token_row = Gtk.Template.Child()
 
-    wiki_spotify_url = "https://www.gnome.org"
-    wiki_genius_url = "https://txnmxy.netlify.app"
+    wiki_spotify_url = "https://github.com/TanmayPatil105/verse/tree/main/wiki#spotify"
+    wiki_genius_url = "https://github.com/TanmayPatil105/verse/tree/main/wiki#genius"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
