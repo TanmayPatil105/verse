@@ -16,6 +16,7 @@
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="visible">False</property>
+                <signal name="clicked" handler="on_refresh_cb"/>
               </object>
             </child>
             <child type="end">
@@ -49,6 +50,7 @@
                   <object class="GtkButton" id="search_button">
                     <property name="label">Fetch lyrics</property>
                     <property name="visible">True</property>
+                    <signal name="clicked" handler="on_search_cb"/>
                     <style>
                       <class name="pill"/>
                       <class name="suggested-action"/>

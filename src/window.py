@@ -51,8 +51,6 @@ class VerseWindow(Adw.ApplicationWindow):
         self.song = None
 
         # set up widgets
-        self.search_button.connect("clicked", self.on_search_cb)
-        self.refresh_button.connect("clicked", self.on_refresh_cb)
         self.refresh_button.bind_property(
             "visible",
             self.search_button,
@@ -66,11 +64,13 @@ class VerseWindow(Adw.ApplicationWindow):
             "visible", self.label, "visible", GObject.BindingFlags.INVERT_BOOLEAN
         )
 
+    @Gtk.Template.Callback()
     def on_search_cb(self, button):
         # call this on a separate thread
         self.fetch_details()
         self.refresh_button.set_visible(True)
 
+    @Gtk.Template.Callback()
     def on_refresh_cb(self, button):
         # call this on a separate thread
         self.fetch_details()

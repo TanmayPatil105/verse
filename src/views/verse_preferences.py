@@ -68,17 +68,19 @@ class VersePreferences(Adw.PreferencesDialog):
 
     def update_widgets(self):
         secrets = retrieve_secrets()
+        if secrets is None:
+            return
 
-        if secrets.get("client-id"):
+        if secrets["client-id"] is not None:
             self.client_id_row.set_text(secrets["client-id"])
 
-        if secrets.get("client-secret"):
+        if secrets["client-secret"] is not None:
             self.client_secret_row.set_text(secrets["client-secret"])
 
-        if secrets.get("refresh-token"):
+        if secrets["refresh-token"] is not None:
             self.refresh_token_row.set_text(secrets["refresh-token"])
 
-        if secrets.get("genius-token"):
+        if secrets["genius-token"] is not None:
             self.genius_token_row.set_text(secrets["genius-token"])
 
     def open_wiki(self, button, url):

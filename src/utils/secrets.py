@@ -80,4 +80,3 @@ def update_secrets(
         SECRET_SCHEMA, {}, Secret.COLLECTION_DEFAULT, SECRET_KEY, json_data, None
     )
 
-    print(secrets)
