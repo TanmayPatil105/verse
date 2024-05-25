@@ -59,7 +59,6 @@ class VersePreferences(Adw.PreferencesDialog):
     @Gtk.Template.Callback()
     def refresh_token_row_applied_cb(self, widget, *args):
         refresh_token = self.refresh_token_row.get_text()
-        print(refresh_token)
         update_secrets(refresh_token=refresh_token)
 
     @Gtk.Template.Callback()
