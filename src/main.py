@@ -24,7 +24,7 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
 from .window import VerseWindow
-
+from .views.verse_preferences import VersePreferences
 
 class VerseApplication(Adw.Application):
     def __init__(self):
@@ -32,13 +32,13 @@ class VerseApplication(Adw.Application):
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
+        self.create_action('preferences', self.on_preferences_action, ['<primary>comma'])
 
     def do_activate(self):
-        win = self.props.active_window
-        if not win:
-            win = VerseWindow(application=self)
-        win.present()
+        self.win = self.props.active_window
+        if not self.win:
+            self.win = VerseWindow(application=self)
+        self.win.present()
 
     def on_about_action(self, widget, _):
         about = Adw.AboutWindow(transient_for=self.props.active_window,
@@ -51,7 +51,8 @@ class VerseApplication(Adw.Application):
         about.present()
 
     def on_preferences_action(self, widget, _):
-        print('app.preferences action activated')
+        self.preferences_window = VersePreferences()
+        self.preferences_window.present()
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)

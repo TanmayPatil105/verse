@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.0"/>
+  <template class="VersePreferences" parent="AdwPreferencesDialog">
+    <property name="content-height">500</property>
+    <property name="search-enabled">True</property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="icon_name">preferences-window-layout-symbolic</property>
+        <property name="title">L_ayout</property>
+        <property name="description">Your API secrets</property>
+        <property name="use-underline">True</property>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Spotify</property>
+            <child>
+              <object class="AdwPasswordEntryRow" id="client_id_row">
+                <property name="title" translatable="yes">Client ID</property>
+                <property name="show-apply-button">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPasswordEntryRow" id="client_secret_row">
+                <property name="title" translatable="yes">Client Secret</property>
+                <property name="show-apply-button">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPasswordEntryRow" id="refresh_token_row">
+                <property name="title" translatable="yes">Refresh Token</property>
+                <property name="show-apply-button">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Genius</property>
+            <child>
+              <object class="AdwPasswordEntryRow" id="genius_token_row">
+                <property name="title" translatable="yes">Genius Token</property>
+                <property name="show-apply-button">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

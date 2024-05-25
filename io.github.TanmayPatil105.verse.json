@@ -23,7 +23,7 @@
         "*.a"
     ],
     "modules" : [
-	"./python3-requirements.json",
+        "./python3-requirements.json",
         {
             "name" : "verse",
             "builddir" : true,
@@ -31,7 +31,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://github.com/TanmayPatil105/verse.git"
+                    "url" : "https://github.com/TanmayPatil105/verse.git",
+                    "tag" : "main"
                 }
             ]
         }

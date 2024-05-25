@@ -3,7 +3,8 @@
   <gresource prefix="/io/github/TanmayPatil105/verse">
     <!-- template files -->
     <file preprocess="xml-stripblanks">window.ui</file>
-		<file preprocess="xml-stripblanks">views/lyrics_view.ui</file>
+    <file preprocess="xml-stripblanks">views/lyrics_view.ui</file>
+    <file preprocess="xml-stripblanks">views/verse_preferences.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
 
     <!-- css -->

@@ -46,6 +46,7 @@ verse_sources_utils = [
 
 verse_sources_views = [
   'views/lyrics_view.py',
+  'views/verse_preferences.py',
 ]
 
 install_data(verse_sources, install_dir: moduledir)
