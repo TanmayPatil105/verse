@@ -20,9 +20,12 @@ from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import GLib
 
-@Gtk.Template(resource_path='/io/github/TanmayPatil105/verse/views/verse_preferences.ui')
+
+@Gtk.Template(
+    resource_path="/io/github/TanmayPatil105/verse/views/verse_preferences.ui"
+)
 class VersePreferences(Adw.PreferencesDialog):
-    __gtype_name__ = 'VersePreferences'
+    __gtype_name__ = "VersePreferences"
 
     client_id_row = Gtk.Template.Child()
     client_secret_row = Gtk.Template.Child()
@@ -41,9 +44,7 @@ class VersePreferences(Adw.PreferencesDialog):
         self.genius_token_row.add_suffix(self.wiki_get_token(self.wiki_genius_url))
 
     def open_wiki(self, button, url):
-        GLib.spawn_command_line_async(
-            f"xdg-open {url}"
-        )
+        GLib.spawn_command_line_async(f"xdg-open {url}")
 
     def wiki_get_token(self, url):
         info = Gtk.Button()
@@ -53,4 +54,3 @@ class VersePreferences(Adw.PreferencesDialog):
         info.set_valign(Gtk.Align.CENTER)
         info.connect("clicked", self.open_wiki, url)
         return info
-

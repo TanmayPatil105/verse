@@ -17,7 +17,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import gi
-gi.require_version('WebKit', '6.0')
+
+gi.require_version("WebKit", "6.0")
 from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import GObject, GLib
@@ -32,9 +33,9 @@ import time
 from threading import Thread
 
 
-@Gtk.Template(resource_path='/io/github/TanmayPatil105/verse/window.ui')
+@Gtk.Template(resource_path="/io/github/TanmayPatil105/verse/window.ui")
 class VerseWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'VerseWindow'
+    __gtype_name__ = "VerseWindow"
 
     label = Gtk.Template.Child()
     search_button = Gtk.Template.Child()
@@ -51,9 +52,18 @@ class VerseWindow(Adw.ApplicationWindow):
         # set up widgets
         self.search_button.connect("clicked", self.on_search_cb)
         self.refresh_button.connect("clicked", self.on_refresh_cb)
-        self.refresh_button.bind_property("visible", self.search_button, "visible", GObject.BindingFlags.INVERT_BOOLEAN)
-        self.label.bind_property("visible", self.lyrics_view, "visible", GObject.BindingFlags.INVERT_BOOLEAN)
-        self.lyrics_view.bind_property("visible", self.label, "visible", GObject.BindingFlags.INVERT_BOOLEAN)
+        self.refresh_button.bind_property(
+            "visible",
+            self.search_button,
+            "visible",
+            GObject.BindingFlags.INVERT_BOOLEAN,
+        )
+        self.label.bind_property(
+            "visible", self.lyrics_view, "visible", GObject.BindingFlags.INVERT_BOOLEAN
+        )
+        self.lyrics_view.bind_property(
+            "visible", self.label, "visible", GObject.BindingFlags.INVERT_BOOLEAN
+        )
 
     def on_search_cb(self, button):
         # call this on a separate thread
@@ -72,9 +82,14 @@ class VerseWindow(Adw.ApplicationWindow):
         if "error" not in song:
             if song["is_playing"]:
                 artist = ", ".join([_artist["name"] for _artist in song["artists"]])
-                GLib.idle_add (self.label.set_label, "Searching lyrics for {} by {}...".format(song["title"], artist))
+                GLib.idle_add(
+                    self.label.set_label,
+                    "Searching lyrics for {} by {}...".format(song["title"], artist),
+                )
             else:
-                GLib.idle_add (self.label.set_label, "You have probably paused the song!")
+                GLib.idle_add(
+                    self.label.set_label, "You have probably paused the song!"
+                )
             # fetch lyrics
             # print (song)
             lyrics = get_lyrics(song)
@@ -83,10 +98,9 @@ class VerseWindow(Adw.ApplicationWindow):
                 self.lyrics = sanitize_lyrics(lyrics["lyrics"])
                 GLib.idle_add(self.display_lyrics)
             else:
-                GLib.idle_add (self.label.set_label, lyrics["error"])
+                GLib.idle_add(self.label.set_label, lyrics["error"])
         else:
             GLib.idle_add(self.label.set_label, song["error"])
-
 
     def display_lyrics(self):
         self.lyrics_view.set_visible(True)
@@ -99,4 +113,3 @@ class VerseWindow(Adw.ApplicationWindow):
         # create separate thread
         thread = Thread(target=self.fetch_song)
         thread.start()
-

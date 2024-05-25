@@ -19,14 +19,16 @@
 import gi
 from gi.repository import Adw
 from gi.repository import Gtk
-gi.require_version('WebKit', '6.0')
+
+gi.require_version("WebKit", "6.0")
 from gi.repository import WebKit
 
 from ..utils.utils import lyrics_to_html
 
-@Gtk.Template(resource_path='/io/github/TanmayPatil105/verse/views/lyrics_view.ui')
+
+@Gtk.Template(resource_path="/io/github/TanmayPatil105/verse/views/lyrics_view.ui")
 class LyricsView(Adw.Bin):
-    __gtype_name__ = 'LyricsView'
+    __gtype_name__ = "LyricsView"
 
     carousel = Gtk.Template.Child()
 
@@ -44,7 +46,6 @@ class LyricsView(Adw.Bin):
 
         self.append_view(view)
 
-
     def append_view(self, view):
         self.pages.append(view)
 
@@ -59,4 +60,3 @@ class LyricsView(Adw.Bin):
         view.set_vexpand(True)
         view.set_hexpand(True)
         self.append_view(view)
-

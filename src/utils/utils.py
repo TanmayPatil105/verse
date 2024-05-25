@@ -16,6 +16,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 # comment
 def sanitize_lyrics(lyrics):
     try:
@@ -30,6 +31,7 @@ def sanitize_lyrics(lyrics):
         return sanitized
     except:
         return lyrics
+
 
 def lyrics_to_html(lyrics, song):
     styles = """
@@ -61,7 +63,7 @@ def lyrics_to_html(lyrics, song):
     lines = lyrics.split("\n")
     html += "<h1>{}</h1>\n".format(song["title"])
     artist = ", ".join([_artist["name"] for _artist in song["artists"]])
-    html += "<h1 class=\"artist\">by {}</h1>".format(artist)
+    html += '<h1 class="artist">by {}</h1>'.format(artist)
     for line in lines:
         if line.startswith("["):
             html += "\t<h2>{}</h2>\n".format(line)

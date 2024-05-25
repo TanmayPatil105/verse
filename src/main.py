@@ -19,20 +19,25 @@
 import sys
 import gi
 
-gi.require_version('Gtk', '4.0')
-gi.require_version('Adw', '1')
+gi.require_version("Gtk", "4.0")
+gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Gio, Adw
 from .window import VerseWindow
 from .views.verse_preferences import VersePreferences
 
+
 class VerseApplication(Adw.Application):
     def __init__(self):
-        super().__init__(application_id='io.github.TanmayPatil105.verse',
-                         flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
-        self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action, ['<primary>comma'])
+        super().__init__(
+            application_id="io.github.TanmayPatil105.verse",
+            flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
+        )
+        self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
+        self.create_action("about", self.on_about_action)
+        self.create_action(
+            "preferences", self.on_preferences_action, ["<primary>comma"]
+        )
 
     def do_activate(self):
         self.win = self.props.active_window
@@ -41,13 +46,15 @@ class VerseApplication(Adw.Application):
         self.win.present()
 
     def on_about_action(self, widget, _):
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='verse',
-                                application_icon='io.github.TanmayPatil105.verse',
-                                developer_name='Tanmay Patil',
-                                version='0.1.0',
-                                developers=['Tanmay Patil'],
-                                copyright='© 2024 Tanmay Patil')
+        about = Adw.AboutWindow(
+            transient_for=self.props.active_window,
+            application_name="verse",
+            application_icon="io.github.TanmayPatil105.verse",
+            developer_name="Tanmay Patil",
+            version="0.1.0",
+            developers=["Tanmay Patil"],
+            copyright="© 2024 Tanmay Patil",
+        )
         about.present()
 
     def on_preferences_action(self, widget, _):

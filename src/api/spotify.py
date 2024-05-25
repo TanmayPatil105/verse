@@ -29,18 +29,24 @@ TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token"
 def get_access_token():
 
     try:
-        client_id = os.environ.get('CLIENT_ID')
-        client_secret = os.environ.get('CLIENT_SECRET')
-        refresh_token = os.environ.get('REFRESH_TOKEN')
+        client_id = os.environ.get("CLIENT_ID")
+        client_secret = os.environ.get("CLIENT_SECRET")
+        refresh_token = os.environ.get("REFRESH_TOKEN")
 
         basic = base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
-        response = requests.post(TOKEN_ENDPOINT, headers={
-            "Authorization": f"Basic {basic}",
-            "Content-Type": "application/x-www-form-urlencoded",
-        }, data=urlencode({
-            "grant_type": "refresh_token",
-            "refresh_token": refresh_token,
-        }))
+        response = requests.post(
+            TOKEN_ENDPOINT,
+            headers={
+                "Authorization": f"Basic {basic}",
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            data=urlencode(
+                {
+                    "grant_type": "refresh_token",
+                    "refresh_token": refresh_token,
+                }
+            ),
+        )
 
         response.raise_for_status()
 
@@ -50,25 +56,32 @@ def get_access_token():
         print(f"Error obtaining access token: {e}")
         return None
 
+
 def get_now_playing(access_token):
     if not access_token:
         return {"error": "Invalid access token"}
 
     try:
-        response = requests.get(NOW_PLAYING_ENDPOINT, headers={
-            "Authorization": f"Bearer {access_token}",
-        })
+        response = requests.get(
+            NOW_PLAYING_ENDPOINT,
+            headers={
+                "Authorization": f"Bearer {access_token}",
+            },
+        )
         response.raise_for_status()
 
         return response.json()
     except:
         return None
 
+
 def get_now_playing_item():
     access_token = get_access_token()
 
     if not access_token:
-        return {"error": "Unable to obtain access token. Make sure CLIENT_ID and CLIENT_SECRET are correct."}
+        return {
+            "error": "Unable to obtain access token. Make sure CLIENT_ID and CLIENT_SECRET are correct."
+        }
 
     song = get_now_playing(access_token)
     if not song:
@@ -87,7 +100,7 @@ def get_now_playing_item():
     except:
         return {"error": "Ads :/"}
 
+
 if __name__ == "__main__":
     now_playing_item = get_now_playing_item()
     print(now_playing_item)
-

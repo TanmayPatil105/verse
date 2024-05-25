@@ -21,7 +21,7 @@ import lyricsgenius
 
 
 def get_lyrics(song):
-    genius_token = os.environ.get('GENIUS_TOKEN')
+    genius_token = os.environ.get("GENIUS_TOKEN")
 
     title = song["title"]
     artist = song["artists"][0]["name"]
