@@ -16,21 +16,21 @@
             <property name="title" translatable="yes">Spotify</property>
             <child>
               <object class="AdwPasswordEntryRow" id="client_id_row">
-                <property name="title" translatable="yes">Client ID</property>
+                <property name="title" translatable="yes">CLIENT_ID</property>
                 <property name="show-apply-button">True</property>
                 <signal name="apply" handler="client_id_row_applied_cb"/>
               </object>
             </child>
             <child>
               <object class="AdwPasswordEntryRow" id="client_secret_row">
-                <property name="title" translatable="yes">Client Secret</property>
+                <property name="title" translatable="yes">CLIENT_SECRET</property>
                 <property name="show-apply-button">True</property>
                 <signal name="apply" handler="client_secret_row_applied_cb"/>
               </object>
             </child>
             <child>
               <object class="AdwPasswordEntryRow" id="refresh_token_row">
-                <property name="title" translatable="yes">Refresh Token</property>
+                <property name="title" translatable="yes">REFRESH_TOKEN</property>
                 <property name="show-apply-button">True</property>
                 <signal name="apply" handler="refresh_token_row_applied_cb"/>
               </object>
@@ -42,7 +42,7 @@
             <property name="title" translatable="yes">Genius</property>
             <child>
               <object class="AdwPasswordEntryRow" id="genius_token_row">
-                <property name="title" translatable="yes">Genius Token</property>
+                <property name="title" translatable="yes">GENIUS_TOKEN</property>
                 <property name="show-apply-button">True</property>
                 <signal name="apply" handler="genius_token_row_applied_cb"/>
               </object>
