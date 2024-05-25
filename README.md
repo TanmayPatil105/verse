@@ -21,3 +21,8 @@ meson install -C _build
 ```
 
 Build using [GNOME Builder](https://flathub.org/apps/org.gnome.Builder)
+
+Install using `flatpak-builder`
+```console
+$ flatpak-builder  --force-clean _flatpak/ io.github.TanmayPatil105.verse.json  --user --install
+```

@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
 	<id>io.github.TanmayPatil105.verse.desktop</id>
+	<name>Verse</name>
+	<developer_name>Tanmay Patil</developer_name>
+	<summary>Fetch Lyrics</summary>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>Apache-2.0</project_license>
+	<categories>
+	  <category>GNOME</category>
+	</categories>
 	<description>
-	  <p>No description</p>
+	  <p>Fetch lyrics</p>
 	</description>
 </component>
