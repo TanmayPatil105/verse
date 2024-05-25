@@ -42,6 +42,7 @@ verse_sources_api = [
 
 verse_sources_utils = [
   'utils/utils.py',
+  'utils/secrets.py',
 ]
 
 verse_sources_views = [

@@ -18,20 +18,25 @@
 
 import os
 import lyricsgenius
+from ..utils.secrets import retrieve_secrets
 
 
 def get_lyrics(song):
-    genius_token = os.environ.get("GENIUS_TOKEN")
+    try:
+        secrets = retrieve_secrets()
+        genius_token = secrets["genius-token"]
 
-    title = song["title"]
-    artist = song["artists"][0]["name"]
+        title = song["title"]
+        artist = song["artists"][0]["name"]
 
-    genius = lyricsgenius.Genius(genius_token)
+        genius = lyricsgenius.Genius(genius_token)
 
-    # search for all artists
-    song = genius.search_song(title, artist)
+        # FIXME: search for all artists
+        song = genius.search_song(title, artist)
 
-    if not song:
+        if not song:
+            return {"error": "Unable to fetch lyrics"}
+
+        return {"lyrics": song.lyrics}
+    except:
         return {"error": "Unable to fetch lyrics"}
-
-    return {"lyrics": song.lyrics}

@@ -20,6 +20,7 @@ import base64
 import requests
 import os
 from urllib.parse import urlencode
+from ..utils.secrets import retrieve_secrets
 
 # api endpoints
 NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing"
@@ -29,9 +30,10 @@ TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token"
 def get_access_token():
 
     try:
-        client_id = os.environ.get("CLIENT_ID")
-        client_secret = os.environ.get("CLIENT_SECRET")
-        refresh_token = os.environ.get("REFRESH_TOKEN")
+        secrets = retrieve_secrets()
+        client_id = secrets["client-id"]
+        client_secret = secrets["client-secret"]
+        refresh_token = secrets["refresh-token"]
 
         basic = base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()
         response = requests.post(

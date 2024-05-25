@@ -19,6 +19,7 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import GLib
+from ..utils.secrets import retrieve_secrets, update_secrets
 
 
 @Gtk.Template(
@@ -42,6 +43,44 @@ class VersePreferences(Adw.PreferencesDialog):
         self.client_secret_row.add_suffix(self.wiki_get_token(self.wiki_spotify_url))
         self.refresh_token_row.add_suffix(self.wiki_get_token(self.wiki_spotify_url))
         self.genius_token_row.add_suffix(self.wiki_get_token(self.wiki_genius_url))
+
+        self.update_widgets()
+
+    @Gtk.Template.Callback()
+    def client_id_row_applied_cb(self, widget, *args):
+        client_id = self.client_id_row.get_text()
+        update_secrets(client_id=client_id)
+
+    @Gtk.Template.Callback()
+    def client_secret_row_applied_cb(self, widget, *args):
+        client_secret = self.client_secret_row.get_text()
+        update_secrets(client_secret=client_secret)
+
+    @Gtk.Template.Callback()
+    def refresh_token_row_applied_cb(self, widget, *args):
+        refresh_token = self.refresh_token_row.get_text()
+        print(refresh_token)
+        update_secrets(refresh_token=refresh_token)
+
+    @Gtk.Template.Callback()
+    def genius_token_row_applied_cb(self, widget, *args):
+        genius_token = self.genius_token_row.get_text()
+        update_secrets(genius_token=genius_token)
+
+    def update_widgets(self):
+        secrets = retrieve_secrets()
+
+        if secrets.get("client-id"):
+            self.client_id_row.set_text(secrets["client-id"])
+
+        if secrets.get("client-secret"):
+            self.client_secret_row.set_text(secrets["client-secret"])
+
+        if secrets.get("refresh-token"):
+            self.refresh_token_row.set_text(secrets["refresh-token"])
+
+        if secrets.get("genius-token"):
+            self.genius_token_row.set_text(secrets["genius-token"])
 
     def open_wiki(self, button, url):
         GLib.spawn_command_line_async(f"xdg-open {url}")
