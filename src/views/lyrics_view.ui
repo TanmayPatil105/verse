@@ -3,7 +3,6 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="libadwaita" version="1.0"/>
   <template class="LyricsView" parent="AdwBin">
-    <property name="valign">center</property>
     <property name="child">
       <object class="GtkBox" id="box">
         <property name="orientation">vertical</property>
@@ -15,7 +14,6 @@
         <property name="margin-end">10px</property>
         <child>
           <object class="AdwCarousel" id="carousel">
-            <property name="orientation">horizontal</property>
             <style>
              <class name="carousel"/>
             </style>

@@ -72,6 +72,4 @@ def lyrics_to_html(lyrics, song):
 
     html += "\t</body>\n</html>"
 
-    print(html)
-
     return html

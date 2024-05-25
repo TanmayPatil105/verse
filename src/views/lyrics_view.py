@@ -35,28 +35,26 @@ class LyricsView(Adw.Bin):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.pages = []
-
-        # temporary work around to append other pages
-        view = WebKit.WebView()
-        view.load_uri("https://www.gnome.org")
-        view.set_vexpand(True)
-        view.set_hexpand(True)
-        view.set_visible(True)
-
-        self.append_view(view)
+        self.pending_view = None
 
     def append_view(self, view):
-        self.pages.append(view)
-
         self.carousel.append(view)
-        self.carousel.scroll_to(view, True)
+        if self.pending_view is None:
+            view.connect("load-changed", self.on_view_load_changed)
+            self.pending_view = view
+
+    def on_view_load_changed(self, web_view, load_event):
+        if load_event == WebKit.LoadEvent.FINISHED:
+            web_view.disconnect_by_func(self.on_view_load_changed)
+            # instantly scroll
+            self.carousel.scroll_to(web_view, False)
+            self.pending_view = None
 
     def append(self, lyrics, song):
         view = WebKit.WebView()
         html = lyrics_to_html(lyrics, song)
         view.load_html(html)
-        view.set_visible(True)
         view.set_vexpand(True)
         view.set_hexpand(True)
         self.append_view(view)
+

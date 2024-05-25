@@ -37,6 +37,7 @@
                 <property name="visible">False</property>
                 <style>
                   <class name="title-1"/>
+                  <class name="suggested"/>
                 </style>
               </object>
             </child>

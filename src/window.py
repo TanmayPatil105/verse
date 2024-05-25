@@ -37,6 +37,7 @@ from threading import Thread
 class VerseWindow(Adw.ApplicationWindow):
     __gtype_name__ = "VerseWindow"
 
+    box = Gtk.Template.Child()
     label = Gtk.Template.Child()
     search_button = Gtk.Template.Child()
     refresh_button = Gtk.Template.Child()
@@ -90,8 +91,8 @@ class VerseWindow(Adw.ApplicationWindow):
                 GLib.idle_add(
                     self.label.set_label, "You have probably paused the song!"
                 )
+
             # fetch lyrics
-            # print (song)
             lyrics = get_lyrics(song)
 
             if "error" not in lyrics:
@@ -103,13 +104,16 @@ class VerseWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.label.set_label, song["error"])
 
     def display_lyrics(self):
-        self.lyrics_view.set_visible(True)
+        self.box.set_valign(Gtk.Align.FILL)
         self.lyrics_view.append(self.lyrics, self.song)
+        self.lyrics_view.set_visible(True)
 
     def fetch_details(self):
+        self.box.set_valign(Gtk.Align.CENTER)
         self.label.set_label("Fetching song...")
         self.label.set_visible(True)
 
         # create separate thread
         thread = Thread(target=self.fetch_song)
         thread.start()
+
