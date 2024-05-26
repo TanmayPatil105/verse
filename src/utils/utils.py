@@ -17,7 +17,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-# comment
+import re
+
 def sanitize_lyrics(lyrics):
     try:
         # Remove till "Lyrics" from fetched lyrics
@@ -32,6 +33,9 @@ def sanitize_lyrics(lyrics):
     except:
         return lyrics
 
+def sanitize_title(title):
+    sanitized = re.sub(r'\(feat\. [^\)]*\)', '', title)
+    return sanitized.strip()
 
 def lyrics_to_html(lyrics, song):
     styles = """

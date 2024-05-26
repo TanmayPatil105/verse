@@ -19,6 +19,7 @@
 import os
 import lyricsgenius
 from ..utils.secrets import retrieve_secrets
+from ..utils.utils import sanitize_title
 
 
 def get_lyrics(song):
@@ -26,11 +27,11 @@ def get_lyrics(song):
         secrets = retrieve_secrets()
         genius_token = secrets["genius-token"]
 
-        title = song["title"]
+        title = sanitize_title(song["title"])
+        # FIXME: look for all artists
         artist = song["artists"][0]["name"]
 
         genius = lyricsgenius.Genius(genius_token)
-
         # FIXME: search for all artists
         song = genius.search_song(title, artist)
 
