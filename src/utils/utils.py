@@ -18,6 +18,8 @@
 
 
 import re
+import random
+
 
 def sanitize_lyrics(lyrics):
     try:
@@ -33,41 +35,91 @@ def sanitize_lyrics(lyrics):
     except:
         return lyrics
 
+
 def sanitize_title(title):
-    sanitized = re.sub(r'\(feat\. [^\)]*\)', '', title)
+    sanitized = re.sub(r"\(feat\. [^\)]*\)", "", title)
+    sanitized = re.sub(r"\(with\. [^\)]*\)", "", sanitized)
     return sanitized.strip()
 
+
 def lyrics_to_html(lyrics, song):
+    backgrounds = [
+        "#00838F",
+        "#F08080",
+        "#FFD700",
+        "#6A0Dad",
+        "#A0C8A0",
+        "#D3A7A4",
+        "#87CEEB",
+        "#40E0D0",
+        "#FFFACD",
+        "#E0B0FF",
+        "#C8A2C8",
+    ]
+
+    background = random.choice(backgrounds)
+
+    text_color = "#241F31"
+    h2_color = "#FFFFFF"
+
+    if background == "#FFFACD":
+        h2_color = "#0047AB"
+    elif background == "#40E0D0":
+        h2_color = "#800020"
+
     styles = """
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
         body {
-            font-family: Arial, sans-serif;
-            background-color: #2ec27e;
-            padding: 20px;
-            text-align: center;
+          font-family: 'Montserrat', sans-serif;
+          background-color: %s;
+          padding: 40px;
+          text-align: center;
+          color: %s;
         }
+
+        h1 {
+          font-size: 48px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
         h1.artist {
-            font-size: 28px;
+          font-size: 36px;
+          font-weight: bold;
+          margin-bottom: 20px;
         }
+
         h2 {
-            font-size: 30px;
-            color: #f6f5f4;
-            font-weight: bold;
+          font-size: 30px;
+          color: %s;
+          font-weight: bold;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+          margin-bottom: 30px;
         }
+
         p {
-            font-size: 23px;
-            color: #241F31;;
-            margin: 10px 0;
+          font-size: 24px;
+          line-height: 1.5;
+          margin: 15px 0;
+          font-weight: 500;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
     </style>
-    """
+    """ % (
+        background,
+        text_color,
+        h2_color,
+    )
 
     html = "<!DOCTYPE html>\n<html>\n<head>{}</head>\n<body>".format(styles)
 
     lines = lyrics.split("\n")
+
     html += "<h1>{}</h1>\n".format(song["title"])
     artist = ", ".join([_artist["name"] for _artist in song["artists"]])
     html += '<h1 class="artist">by {}</h1>'.format(artist)
+
     for line in lines:
         if line.startswith("["):
             html += "\t<h2>{}</h2>\n".format(line)
