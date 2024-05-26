@@ -25,7 +25,7 @@ Build using [GNOME Builder](https://flathub.org/apps/org.gnome.Builder)
 Install using `flatpak-builder`
 ```console
 $ flatpak-builder  --force-clean _flatpak/ io.github.TanmayPatil105.verse.json  --user --install
-$ flatpak run io.github.TanmayPatil105.verse.json
+$ flatpak run io.github.TanmayPatil105.verse
 ```
 
 ## API keys
