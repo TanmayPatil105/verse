@@ -27,7 +27,7 @@ from gi.repository import WebKit
 from .views.lyrics_view import LyricsView
 from .api.spotify import get_now_playing_item
 from .api.lyrics import get_lyrics
-from .utils.utils import sanitize_lyrics
+from .lib.utils import sanitize_lyrics
 
 import time
 from threading import Thread

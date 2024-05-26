@@ -1,4 +1,4 @@
-# utils.py
+# html.py
 #
 # Copyright 2024 Tanmay Patil <tanmaynpatil105@gmail.com>
 #
@@ -17,30 +17,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-import re
 import random
-
-
-def sanitize_lyrics(lyrics):
-    try:
-        # Remove till "Lyrics" from fetched lyrics
-        start_pos = lyrics.find("Lyrics") + len("Lyrics")
-        lyrics = lyrics[start_pos:]
-
-        # Remove "Embed" present at the last
-        end_pos = lyrics.rfind("Embed")
-        sanitized = lyrics[:end_pos].strip() + "\n"
-
-        return sanitized
-    except:
-        return lyrics
-
-
-def sanitize_title(title):
-    sanitized = re.sub(r"\(feat\. [^\)]*\)", "", title)
-    sanitized = re.sub(r"\(with\. [^\)]*\)", "", sanitized)
-    return sanitized.strip()
-
 
 def lyrics_to_html(lyrics, song):
     backgrounds = [

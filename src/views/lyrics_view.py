@@ -23,7 +23,7 @@ from gi.repository import Gtk
 gi.require_version("WebKit", "6.0")
 from gi.repository import WebKit
 
-from ..utils.utils import lyrics_to_html
+from ..lib.html import lyrics_to_html
 
 
 @Gtk.Template(resource_path="/io/github/TanmayPatil105/verse/views/lyrics_view.ui")

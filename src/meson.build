@@ -1,7 +1,7 @@
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 moduledir = pkgdatadir / 'verse'
 moduledir_api = pkgdatadir / 'verse' / 'api'
-moduledir_utils = pkgdatadir / 'verse' / 'utils'
+moduledir_lib = pkgdatadir / 'verse' / 'lib'
 moduledir_views = pkgdatadir / 'verse' / 'views'
 gnome = import('gnome')
 
@@ -40,9 +40,10 @@ verse_sources_api = [
   'api/lyrics.py',
 ]
 
-verse_sources_utils = [
-  'utils/utils.py',
-  'utils/secrets.py',
+verse_sources_lib = [
+  'lib/utils.py',
+  'lib/html.py',
+  'lib/secrets.py',
 ]
 
 verse_sources_views = [
@@ -52,5 +53,5 @@ verse_sources_views = [
 
 install_data(verse_sources, install_dir: moduledir)
 install_data(verse_sources_api, install_dir: moduledir_api)
-install_data(verse_sources_utils, install_dir: moduledir_utils)
+install_data(verse_sources_lib, install_dir: moduledir_lib)
 install_data(verse_sources_views, install_dir: moduledir_views)

@@ -19,7 +19,7 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import GLib
-from ..utils.secrets import retrieve_secrets, update_secrets
+from ..lib.secrets import retrieve_secrets, update_secrets
 
 
 @Gtk.Template(

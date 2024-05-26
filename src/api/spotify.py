@@ -20,7 +20,7 @@ import base64
 import requests
 import os
 from urllib.parse import urlencode
-from ..utils.secrets import retrieve_secrets
+from ..lib.secrets import retrieve_secrets
 
 # api endpoints
 NOW_PLAYING_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing"
@@ -87,7 +87,7 @@ def get_now_playing_item():
     if not song:
         return {
             "error": "You are currently not listening to anything!",
-            "description": "Would you like to try again",
+            "description": "Would you like to try again?",
         }
 
     try:

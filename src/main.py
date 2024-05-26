@@ -25,7 +25,7 @@ gi.require_version("Adw", "1")
 from gi.repository import Gtk, Gio, Adw
 from .window import VerseWindow
 from .views.verse_preferences import VersePreferences
-from .utils.secrets import setup_secrets
+from .lib.secrets import setup_secrets
 
 
 class VerseApplication(Adw.Application):

@@ -18,8 +18,8 @@
 
 import os
 import lyricsgenius
-from ..utils.secrets import retrieve_secrets
-from ..utils.utils import sanitize_title
+from ..lib.secrets import retrieve_secrets
+from ..lib.utils import sanitize_title
 
 
 def get_lyrics(song):
