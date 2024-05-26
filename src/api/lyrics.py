@@ -31,7 +31,7 @@ def get_lyrics(song):
         # FIXME: look for all artists
         artist = song["artists"][0]["name"]
 
-        genius = lyricsgenius.Genius(genius_token)
+        genius = lyricsgenius.Genius(genius_token, verbose=False)
         # FIXME: search for all artists
         song = genius.search_song(title, artist)
 
