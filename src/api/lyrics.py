@@ -36,8 +36,14 @@ def get_lyrics(song):
         song = genius.search_song(title, artist)
 
         if not song:
-            return {"error": "Unable to fetch lyrics"}
+            return {
+                "error": "No Lyrics found",
+                "description": f"Couldn't find the lyrics for {title}",
+            }
 
         return {"lyrics": song.lyrics}
     except:
-        return {"error": "Unable to fetch lyrics"}
+        return {
+            "error": "Unable to fetch lyrics",
+            "description": "Please ensure that the GENIUS_TOKEN is valid in the Preferences.",
+        }

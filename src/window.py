@@ -38,7 +38,7 @@ class VerseWindow(Adw.ApplicationWindow):
     __gtype_name__ = "VerseWindow"
 
     box = Gtk.Template.Child()
-    label = Gtk.Template.Child()
+    status = Gtk.Template.Child()
     search_button = Gtk.Template.Child()
     refresh_button = Gtk.Template.Child()
     lyrics_view = Gtk.Template.Child()
@@ -57,11 +57,11 @@ class VerseWindow(Adw.ApplicationWindow):
             "visible",
             GObject.BindingFlags.INVERT_BOOLEAN,
         )
-        self.label.bind_property(
+        self.status.bind_property(
             "visible", self.lyrics_view, "visible", GObject.BindingFlags.INVERT_BOOLEAN
         )
         self.lyrics_view.bind_property(
-            "visible", self.label, "visible", GObject.BindingFlags.INVERT_BOOLEAN
+            "visible", self.status, "visible", GObject.BindingFlags.INVERT_BOOLEAN
         )
 
     @Gtk.Template.Callback()
@@ -117,13 +117,16 @@ class VerseWindow(Adw.ApplicationWindow):
 
                 artist = ", ".join([_artist["name"] for _artist in song["artists"]])
                 GLib.idle_add(
-                    self.label.set_label,
-                    "Searching lyrics for {} by {}...".format(song["title"], artist),
+                    self.status.set_title,
+                    "Searching lyrics for {}..".format(song["title"], artist),
+                )
+                GLib.idle_add(
+                    self.status.set_description,
+                    "by {}".format(artist),
                 )
             else:
-                GLib.idle_add(
-                    self.label.set_label, "You have probably paused the song!"
-                )
+                GLib.idle_add(self.status.set_title, "Song is Paused!")
+                GLib.idle_add(self.status.set_description, "Here's the lyrics anyway..")
 
             # fetch lyrics
             lyrics = get_lyrics(song)
@@ -132,9 +135,11 @@ class VerseWindow(Adw.ApplicationWindow):
                 self.lyrics = sanitize_lyrics(lyrics["lyrics"])
                 GLib.idle_add(self.display_lyrics)
             else:
-                GLib.idle_add(self.label.set_label, lyrics["error"])
+                GLib.idle_add(self.status.set_title, lyrics["error"])
+                GLib.idle_add(self.status.set_description, lyrics["description"])
         else:
-            GLib.idle_add(self.label.set_label, song["error"])
+            GLib.idle_add(self.status.set_title, song["error"])
+            GLib.idle_add(self.status.set_description, song["description"])
 
     def display_lyrics(self):
         self.box.set_valign(Gtk.Align.FILL)
@@ -143,8 +148,9 @@ class VerseWindow(Adw.ApplicationWindow):
 
     def fetch_details(self):
         self.box.set_valign(Gtk.Align.CENTER)
-        self.label.set_label("Fetching song...")
-        self.label.set_visible(True)
+        self.status.set_title("Fetching song...")
+        self.status.set_description(None)
+        self.status.set_visible(True)
 
         # create separate thread
         thread = Thread(target=self.fetch_song)

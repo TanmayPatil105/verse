@@ -34,13 +34,9 @@
             <property name="orientation">vertical</property>
             <property name="valign">center</property>
             <child>
-              <object class="GtkLabel" id="label">
-                <property name="visible">False</property>
-                <style>
-                  <class name="title-1"/>
-                  <class name="suggested"/>
-                </style>
-              </object>
+              <object class="AdwStatusPage" id="status">
+              <property name="visible">False</property>
+            </object>
             </child>
             <child>
               <object class="GtkBox">

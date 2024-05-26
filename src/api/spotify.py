@@ -60,9 +60,6 @@ def get_access_token():
 
 
 def get_now_playing(access_token):
-    if not access_token:
-        return {"error": "Invalid access token"}
-
     try:
         response = requests.get(
             NOW_PLAYING_ENDPOINT,
@@ -82,12 +79,16 @@ def get_now_playing_item():
 
     if not access_token:
         return {
-            "error": "Unable to obtain access token. Make sure CLIENT_ID and CLIENT_SECRET are correct."
+            "error": "Unable to obtain access token.",
+            "description": "Please ensure that the CLIENT_ID and CLIENT_SECRET are valid in the Preferences.",
         }
 
     song = get_now_playing(access_token)
     if not song:
-        return {"error": "You are probably offline!"}
+        return {
+            "error": "You are currently not listening to anything!",
+            "description": "Would you like to try again",
+        }
 
     try:
         artists = song["item"]["artists"]
@@ -100,7 +101,7 @@ def get_now_playing_item():
             "is_playing": is_playing,
         }
     except:
-        return {"error": "Ads :/"}
+        return {"error": "Uh-oh, smells like Ads", "description": "It'll pass.."}
 
 
 if __name__ == "__main__":
