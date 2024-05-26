@@ -23,7 +23,7 @@ def lyrics_to_html(lyrics, song):
     backgrounds = [
         "#00838F",
         "#F08080",
-        "#FFD700",
+        "#FEE569",
         "#6A0Dad",
         "#A0C8A0",
         "#D3A7A4",
@@ -39,7 +39,7 @@ def lyrics_to_html(lyrics, song):
     text_color = "#241F31"
     h2_color = "#FFFFFF"
 
-    if background == "#FFFACD":
+    if background == "#FFFACD" or background == "#FEE569":
         h2_color = "#0047AB"
     elif background == "#40E0D0":
         h2_color = "#800020"
