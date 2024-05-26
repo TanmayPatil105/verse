@@ -46,3 +46,10 @@ flatpak run io.github.TanmayPatil105.verse
 `verse` requires Spotify and Genius.com APIs.
 
 Take a [look](./wiki/README.md) on how to obtain the API tokens.
+
+
+## Motivation
+Well..
+
+<img src="./images/spotify-app-no-lyrics.png" alt="No lyrics" height="300"/>
+<img src="./images/spotify-app-premium.png" alt="Premium subscription" height="300"/>
