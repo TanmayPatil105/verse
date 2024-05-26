@@ -67,10 +67,12 @@ class VerseWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_search_cb(self, button):
         # activate refresh shortcut
-        self.add_shortcut(Gtk.Shortcut.new(
-            Gtk.ShortcutTrigger.parse_string("<Control>r"),
-            Gtk.CallbackAction.new(self._refresh_cb)
-        ))
+        self.add_shortcut(
+            Gtk.Shortcut.new(
+                Gtk.ShortcutTrigger.parse_string("<Control>r"),
+                Gtk.CallbackAction.new(self._refresh_cb),
+            )
+        )
         # call this on a separate thread
         self.fetch_details()
         self.refresh_button.set_visible(True)
@@ -84,13 +86,35 @@ class VerseWindow(Adw.ApplicationWindow):
         self.fetch_details()
         return True
 
+    def song_unchanged(self, song):
+        if self.prev_song and song:
+            try:
+                if (
+                    self.prev_song["title"] == self.song["title"]
+                    and self.prev_song["artists"] == self.song["artists"]
+                ):
+                    return True
+            except:
+                return False
+
+        return False
+
     # runs on a thread
     def fetch_song(self):
         song = get_now_playing_item()
+        self.prev_song = self.song
         self.song = song
 
         if "error" not in song:
+            # if song is unchanged, do not fetch
+            if self.song_unchanged(song):
+                # show lyrics
+                self.box.set_valign(Gtk.Align.FILL)
+                self.lyrics_view.set_visible(True)
+                return
+
             if song["is_playing"]:
+
                 artist = ", ".join([_artist["name"] for _artist in song["artists"]])
                 GLib.idle_add(
                     self.label.set_label,
@@ -125,4 +149,3 @@ class VerseWindow(Adw.ApplicationWindow):
         # create separate thread
         thread = Thread(target=self.fetch_song)
         thread.start()
-
