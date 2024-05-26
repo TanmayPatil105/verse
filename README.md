@@ -16,10 +16,10 @@ verse is licensed under the Apache-2.0.
 #### Build locally:
 
 Required packages for Debian, Ubuntu, Mint etc.
-```bash
+```console
 sudo apt install meson ninja-build python-setuptools libgtk-4-dev libadwaita-1-0
 ```
-```bash
+```console
 meson setup _build
 meson compile -C _build
 meson install -C _build
@@ -32,7 +32,7 @@ Click the `Build` button at the top once the project is loaded.
 
 
 #### Install using `flatpak-builder` (works on all Linux distributions)
-```bash
+```console
 # for Debian, Ubuntu, Mint etc.
 sudo apt install flatpak-builder
 
