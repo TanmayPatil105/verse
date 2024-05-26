@@ -19,30 +19,29 @@
 
 import random
 
+# FIXME: We can always improve this
+THEMES = [
+    {"background_color": "#00838F", "text_color": "#241F31", "h2_color": "#FFFFFF"},
+    {"background_color": "#F08080", "text_color": "#112A46", "h2_color": "#DDDDDD"},
+    {"background_color": "#FEE569", "text_color": "#252E44", "h2_color": "#4D4B4B"},
+    {"background_color": "#6A0DAD", "text_color": "#DDDDDD", "h2_color": "#BD90FF"},
+    {"background_color": "#A0C8A0", "text_color": "#302F2F", "h2_color": "#DDDDDD"},
+    {"background_color": "#D3A7A4", "text_color": "#302F2F", "h2_color": "#DDDDDD"},
+    {"background_color": "#87CEEB", "text_color": "#302F2F", "h2_color": "#444444"},
+    {"background_color": "#40E0D0", "text_color": "#302F2F", "h2_color": "#341F2F"},
+    {"background_color": "#FFFACD", "text_color": "#343D3B", "h2_color": "#341F2F"},
+    {"background_color": "#E0B0FF", "text_color": "#343D3B", "h2_color": "#343D3B"},
+    {"background_color": "#758A84", "text_color": "#302F2F", "h2_color": "#302F2F"},
+]
+
+
 def lyrics_to_html(lyrics, song):
-    backgrounds = [
-        "#00838F",
-        "#F08080",
-        "#FEE569",
-        "#6A0Dad",
-        "#A0C8A0",
-        "#D3A7A4",
-        "#87CEEB",
-        "#40E0D0",
-        "#FFFACD",
-        "#E0B0FF",
-        "#C8A2C8",
-    ]
 
-    background = random.choice(backgrounds)
+    theme = random.choice(THEMES)
 
-    text_color = "#241F31"
-    h2_color = "#FFFFFF"
-
-    if background == "#FFFACD" or background == "#FEE569":
-        h2_color = "#0047AB"
-    elif background == "#40E0D0":
-        h2_color = "#800020"
+    background_color = theme["background_color"]
+    text_color = theme["text_color"]
+    h2_color = theme["h2_color"]
 
     styles = """
     <style>
@@ -76,7 +75,7 @@ def lyrics_to_html(lyrics, song):
         }
 
         p {
-          font-size: 24px;
+          font-size: 27px;
           line-height: 1.5;
           margin: 15px 0;
           font-weight: 500;
@@ -84,7 +83,7 @@ def lyrics_to_html(lyrics, song):
         }
     </style>
     """ % (
-        background,
+        background_color,
         text_color,
         h2_color,
     )
