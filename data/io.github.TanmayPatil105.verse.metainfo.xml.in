@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-	<id>io.github.TanmayPatil105.verse.desktop</id>
-	<name>Verse</name>
-	<developer_name>Tanmay Patil</developer_name>
-	<summary>Fetch Lyrics</summary>
+	<id>io.github.TanmayPatil105.verse</id>
+	<launchable type="desktop-id">io.github.TanmayPatil105.verse.desktop</launchable>
+	<name>verse</name>
+	<summary>Fetch lyrics of the song currently playing on Spotify</summary>
+	<developer id="io.github.TanmayPatil105">
+		<name>Tanmay Patil</name>
+	</developer>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>Apache-2.0</project_license>
 	<categories>
-	  <category>GNOME</category>
+		<category>GTK</category>
+		<category>Utility</category>
 	</categories>
 	<description>
-	  <p>Fetch lyrics</p>
+		<p>
+			A simple application that fetches lyrics of the song currently
+			playing on Spotify and displays it on a beautiful user interface. Features:
+		</p>
+		<ul>
+			<li>Simple, easy to use interface</li>
+			<li>Paginated view displays previously played songs</li>
+			<li>Multiple themes</li>
+		</ul>
 	</description>
+
+	<releases>
+		<release version="0.1.1" date="2024-05-27">
+			<description>
+				<p>This release adds the following improvements:</p>
+				<ul>
+					<li>Maintanin contrast in theme colors</li>
+					<li>Use AdwStatusPage to display status</li>
+					<li>Improved error messages</li>
+				</ul>
+			</description>
+		</release>
+	</releases>
+
+	<screenshots>
+		<screenshot type="default">
+			<image type="source">https://raw.githubusercontent.com/TanmayPatil105/verse/main/images/verse-song.png</image>
+			<caption>Lyrics of current playing song</caption>
+		</screenshot>
+		<screenshot type="default">
+			<image type="source">https://raw.githubusercontent.com/TanmayPatil105/verse/main/images/verse-paginated.png</image>
+			<caption>Paginated view displays previously played songs</caption>
+		</screenshot>
+	</screenshots>
 </component>
