@@ -38,6 +38,8 @@
 		</release>
 	</releases>
 
+	<url type="homepage">https://github.com/TanmayPatil105/verse</url>
+	<content_rating type="oars-1.1" />
 	<screenshots>
 		<screenshot type="default">
 			<image type="source">https://raw.githubusercontent.com/TanmayPatil105/verse/main/images/verse-song.png</image>
