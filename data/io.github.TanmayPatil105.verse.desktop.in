@@ -4,5 +4,6 @@ Exec=verse
 Icon=io.github.TanmayPatil105.verse
 Terminal=false
 Type=Application
-Categories=GTK;
+Categories=Utility;GTK;
+Keywords=verse;lyrics;spotify;
 StartupNotify=true
