@@ -54,7 +54,7 @@ class VerseApplication(Adw.Application):
             application_name="verse",
             application_icon="io.github.TanmayPatil105.verse",
             developer_name="Tanmay Patil",
-            version="0.1.0",
+            version="0.1.1",
             developers=["Tanmay Patil"],
             copyright="© 2024 Tanmay Patil",
         )
