@@ -36,6 +36,5 @@ def sanitize_lyrics(lyrics):
 
 def sanitize_title(title):
     sanitized = re.sub(r"\([^\)]*\)", "", title)
-    # sanitized = re.sub(r"\(with\. [^\)]*\)", "", sanitized)
     return sanitized.strip()
 
