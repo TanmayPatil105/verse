@@ -54,8 +54,8 @@ def get_access_token():
 
         return response.json()["access_token"]
 
-    except requests.exceptions.RequestException as e:
-        print(f"Error obtaining access token: {e}")
+    except:
+        # callee sets the error
         return None
 
 
