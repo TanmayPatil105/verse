@@ -26,6 +26,15 @@
 	</description>
 
 	<releases>
+		<release version="0.1.2" date="2024-05-28">
+			<description>
+				<p>This release adds the following improvements:</p>
+				<ul>
+					<li>Fix app crashing for invalid tokens</li>
+					<li>Fix incorrect lyrics for some songs</li>
+				</ul>
+			</description>
+		</release>
 		<release version="0.1.1" date="2024-05-27">
 			<description>
 				<p>This release adds the following improvements:</p>
