@@ -46,7 +46,6 @@ class VerseWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.prev_song = None
         # song details
         self.song = None
 
@@ -87,11 +86,11 @@ class VerseWindow(Adw.ApplicationWindow):
         return True
 
     def song_unchanged(self, song):
-        if self.prev_song and song:
+        if self.song and song:
             try:
                 if (
-                    self.prev_song["title"] == self.song["title"]
-                    and self.prev_song["artists"] == self.song["artists"]
+                    self.song["title"] == song["title"]
+                    and self.song["artists"] == song["artists"]
                 ):
                     return True
             except:
@@ -102,8 +101,6 @@ class VerseWindow(Adw.ApplicationWindow):
     # runs on a thread
     def fetch_song(self):
         song = get_now_playing_item()
-        self.prev_song = self.song
-        self.song = song
 
         if "error" not in song:
             # if song is unchanged, do not fetch
@@ -132,6 +129,7 @@ class VerseWindow(Adw.ApplicationWindow):
             lyrics = get_lyrics(song)
 
             if "error" not in lyrics:
+                self.song = song
                 self.lyrics = sanitize_lyrics(lyrics["lyrics"])
                 GLib.idle_add(self.display_lyrics)
             else:
