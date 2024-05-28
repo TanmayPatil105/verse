@@ -34,7 +34,51 @@ def sanitize_lyrics(lyrics):
         return lyrics
 
 
+#
+# Genius.com returns incorrect lyrics if the title of the
+# song is not passed properly. Here are some examples:
+#
+#    "See You Again (feat. Charlie Puth)",
+# => "See You Again"
+#
+#    "lovely (with Khalid)",
+# => "lovely"
+#
+#    "Save Your Tears (Remix)(with Ariana Grande)",
+# => "Save Your Tears"
+#
+#    "Wrap me in Plastic - Marcus Layton Radio Edit",
+# => "Wrap me in Plastic"
+#
+#    "Love me like you do - From \"Fifty shades of grey\"",
+# => "Love me like you do"
+#
+#    "A Whole New World (End Title) - From \"Aladdin\"",
+# => "A Whole New World End Title"
+#
+#    "Baby Blue - Remastered 2010",
+# => "Baby Blue"
+#
+#    "Happy working song - From \"Enchanted\"/Soundtrack Version"
+# => "Happy working song"
+#
+
 def sanitize_title(title):
-    sanitized = re.sub(r"\([^\)]*\)", "", title)
-    return sanitized.strip()
+
+    # Remove "(feat. #artist)"
+    title = re.sub(r"\(feat. [^)]*\)", "", title)
+
+    # Remove "(with #artist)"
+    title = re.sub(r"\(with [^)]*\)", "", title)
+
+    # Remove " - From #movie"
+    title = re.sub(r" - .*", "", title)
+
+    # Update more keywords if necessary
+    title = re.sub(r"remix", "", title, flags=re.IGNORECASE)
+
+    # Remove all round brackets
+    title = re.sub(r"\(|\)", "", title)
+
+    return title.strip()
 
