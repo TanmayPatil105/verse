@@ -26,14 +26,15 @@ def get_lyrics(song):
     try:
         secrets = retrieve_secrets()
         genius_token = secrets["genius-token"]
+        genius = lyricsgenius.Genius(genius_token, verbose=False)
 
         title = sanitize_title(song["title"])
-        # FIXME: look for all artists
-        artist = song["artists"][0]["name"]
 
-        genius = lyricsgenius.Genius(genius_token, verbose=False)
-        # FIXME: search for all artists
-        song = genius.search_song(title, artist)
+        for artist in song["artists"]:
+            artist_name = artist["name"]
+            song = genius.search_song(title, artist_name)
+            if song:
+                break
 
         if not song:
             return {
