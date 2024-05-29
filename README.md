@@ -19,6 +19,7 @@
 <p align="center">
     <img src="./images/verse-song.png" alt="Another Day of Sun" height="300"/>
 </p>
+
 ## License
 
 verse is licensed under the Apache-2.0.
