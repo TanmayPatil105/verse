@@ -1,9 +1,24 @@
-# verse
+<h1 align="center">
+  <img src="data/icons/hicolor/scalable/apps/io.github.TanmayPatil105.verse.svg" alt="verse" width="192" height="192"/>
+  <br>
+  verse
+</h1>
 
-Displays the lyrics of the song currently playing on Spotify.
+<p align="center">
+  <strong>Fetch the lyrics of the song currently playing on Spotify</strong>
+</p>
 
-<img src="./images/verse-song.png" alt="Another Day of Sun" height="300"/>
+<p align="center">
+  <a href="https://flathub.org/apps/details/io.github.TanmayPatil105.verse">
+    <img width="200" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-i-en.svg"/>
+  </a>
+  <br>
+</p>
 
+
+<p align="center">
+    <img src="./images/verse-song.png" alt="Another Day of Sun" height="300"/>
+</p>
 ## License
 
 verse is licensed under the Apache-2.0.
