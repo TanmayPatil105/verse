@@ -49,7 +49,7 @@ def lyrics_to_html(lyrics, song):
         body {
           font-family: 'Montserrat', sans-serif;
           background-color: %s;
-          padding: 40px;
+          padding: 10px;
           text-align: center;
           color: %s;
         }
