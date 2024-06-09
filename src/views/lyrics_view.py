@@ -37,6 +37,11 @@ class LyricsView(Adw.Bin):
 
         self.pending_view = None
 
+        # Optimize page loading
+        self.settings = WebKit.Settings()
+        self.settings.set_enable_javascript(False)
+        self.settings.set_enable_page_cache(False)
+
     def append_view(self, view):
         self.carousel.append(view)
         if self.pending_view is None:
@@ -52,6 +57,7 @@ class LyricsView(Adw.Bin):
 
     def append(self, lyrics, song):
         view = WebKit.WebView()
+        view.set_settings(self.settings)
         html = lyrics_to_html(lyrics, song)
         view.load_html(html)
         view.set_vexpand(True)
