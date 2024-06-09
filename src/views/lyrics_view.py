@@ -52,7 +52,7 @@ class LyricsView(Adw.Bin):
         if load_event == WebKit.LoadEvent.FINISHED:
             web_view.disconnect_by_func(self.on_view_load_changed)
             # instantly scroll
-            self.carousel.scroll_to(web_view, False)
+            self.carousel.scroll_to(web_view, True)
             self.pending_view = None
 
     def append(self, lyrics, song):
