@@ -29,10 +29,21 @@
               </object>
             </child>
             <child>
-              <object class="AdwPasswordEntryRow" id="refresh_token_row">
-                <property name="title" translatable="yes">REFRESH_TOKEN</property>
-                <property name="show-apply-button">True</property>
-                <signal name="apply" handler="refresh_token_row_applied_cb"/>
+              <object class="GtkBox">
+                <property name="halign">center</property>
+                <child>
+                  <object class="GtkButton" id="refresh_token_button">
+                    <property name="label" translatable="yes">Generate</property>
+                    <property name="tooltip-text">Generate Refresh token</property>
+                    <property name="sensitive">False</property>
+                    <property name="margin-top">10</property>
+                    <signal name="clicked" handler="refresh_token_button_pressed_cb"/>
+                    <style>
+                      <class name="pill"/>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

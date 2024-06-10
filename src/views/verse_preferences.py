@@ -30,7 +30,7 @@ class VersePreferences(Adw.PreferencesDialog):
 
     client_id_row = Gtk.Template.Child()
     client_secret_row = Gtk.Template.Child()
-    refresh_token_row = Gtk.Template.Child()
+    refresh_token_button = Gtk.Template.Child()
     genius_token_row = Gtk.Template.Child()
 
     wiki_spotify_url = "https://github.com/TanmayPatil105/verse/tree/main/wiki#spotify"
@@ -41,7 +41,6 @@ class VersePreferences(Adw.PreferencesDialog):
 
         self.client_id_row.add_suffix(self.wiki_get_token(self.wiki_spotify_url))
         self.client_secret_row.add_suffix(self.wiki_get_token(self.wiki_spotify_url))
-        self.refresh_token_row.add_suffix(self.wiki_get_token(self.wiki_spotify_url))
         self.genius_token_row.add_suffix(self.wiki_get_token(self.wiki_genius_url))
 
         self.update_widgets()
@@ -50,16 +49,17 @@ class VersePreferences(Adw.PreferencesDialog):
     def client_id_row_applied_cb(self, widget, *args):
         client_id = self.client_id_row.get_text()
         update_secrets(client_id=client_id)
+        self.update_widgets()
 
     @Gtk.Template.Callback()
     def client_secret_row_applied_cb(self, widget, *args):
         client_secret = self.client_secret_row.get_text()
         update_secrets(client_secret=client_secret)
+        self.update_widgets()
 
     @Gtk.Template.Callback()
-    def refresh_token_row_applied_cb(self, widget, *args):
-        refresh_token = self.refresh_token_row.get_text()
-        update_secrets(refresh_token=refresh_token)
+    def refresh_token_button_pressed_cb(self, widget, *args):
+        print("Generate refresh token")
 
     @Gtk.Template.Callback()
     def genius_token_row_applied_cb(self, widget, *args):
@@ -71,16 +71,18 @@ class VersePreferences(Adw.PreferencesDialog):
         if secrets is None:
             return
 
-        if secrets["client-id"] is not None:
+        if secrets["client-id"]:
             self.client_id_row.set_text(secrets["client-id"])
 
-        if secrets["client-secret"] is not None:
+        if secrets["client-secret"]:
             self.client_secret_row.set_text(secrets["client-secret"])
 
-        if secrets["refresh-token"] is not None:
-            self.refresh_token_row.set_text(secrets["refresh-token"])
+        if secrets["client-id"] and secrets["client-secret"]:
+            self.refresh_token_button.set_sensitive(True)
+        else:
+            self.refresh_token_button.set_sensitive(False)
 
-        if secrets["genius-token"] is not None:
+        if secrets["genius-token"]:
             self.genius_token_row.set_text(secrets["genius-token"])
 
     def open_wiki(self, button, url):
