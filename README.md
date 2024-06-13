@@ -69,3 +69,4 @@ Well..
 
 <img src="./images/spotify-app-no-lyrics.png" alt="No lyrics" height="300"/>
 <img src="./images/spotify-app-premium.png" alt="Premium subscription" height="300"/>
+<img src="./images/spotify-lyrics-limit.jpg" alt="Monthly lyrics limit" height="300"/>
