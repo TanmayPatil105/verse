@@ -20,6 +20,7 @@ from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import GLib
 from ..lib.secrets import retrieve_secrets, update_secrets
+from ..api.spotify import generate_refresh_token
 
 
 @Gtk.Template(
@@ -59,12 +60,31 @@ class VersePreferences(Adw.PreferencesDialog):
 
     @Gtk.Template.Callback()
     def refresh_token_button_pressed_cb(self, widget, *args):
-        print("Generate refresh token")
+        self.refresh_token_button.set_label("Generating...")
+        GLib.idle_add(self.update_refresh_token)
 
     @Gtk.Template.Callback()
     def genius_token_row_applied_cb(self, widget, *args):
         genius_token = self.genius_token_row.get_text()
         update_secrets(genius_token=genius_token)
+
+    def update_refresh_token(self):
+        token = generate_refresh_token()
+
+        # FIXME: use Toasts to notify
+        if "error" not in token:
+            self.refresh_token_button.set_sensitive(False)
+            self.refresh_token_button.set_label("Success")
+            self.refresh_token_button.remove_css_class("suggested-action")
+            self.refresh_token_button.add_css_class("success")
+            update_secrets(refresh_token=token["refresh_token"])
+            self.refresh_token_button.set_tooltip_text("Generated Succesfully!")
+        else:
+            self.refresh_token_button.set_sensitive(False)
+            self.refresh_token_button.remove_css_class("suggested-action")
+            self.refresh_token_button.add_css_class("error")
+            self.refresh_token_button.set_label("Error")
+            self.refresh_token_button.set_tooltip_text(token["description"])
 
     def update_widgets(self):
         secrets = retrieve_secrets()
@@ -84,6 +104,13 @@ class VersePreferences(Adw.PreferencesDialog):
 
         if secrets["genius-token"]:
             self.genius_token_row.set_text(secrets["genius-token"])
+
+        self.refresh_token_button.remove_css_class("success")
+        self.refresh_token_button.remove_css_class("error")
+        self.refresh_token_button.add_css_class("suggested-action")
+        self.refresh_token_button.set_sensitive(True)
+        self.refresh_token_button.set_label("Generate")
+        self.refresh_token_button.set_tooltip_text("Generate refresh token")
 
     def open_wiki(self, button, url):
         GLib.spawn_command_line_async(f"xdg-open {url}")

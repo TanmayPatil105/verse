@@ -20,6 +20,7 @@ import base64
 import requests
 import os
 from urllib.parse import urlencode
+from spotipy.oauth2 import SpotifyOAuth, CacheFileHandler
 from ..lib.secrets import retrieve_secrets
 
 # api endpoints
@@ -104,6 +105,38 @@ def get_now_playing_item():
         return {"error": "Uh-oh, smells like Ads", "description": "It'll pass.."}
 
 
-if __name__ == "__main__":
-    now_playing_item = get_now_playing_item()
-    print(now_playing_item)
+def generate_refresh_token():
+    XDG_CACHE_PATH = os.path.join(os.environ.get("XDG_CACHE_HOME"), ".cache")
+    try:
+        secrets = retrieve_secrets()
+        client_id = secrets["client-id"]
+        client_secret = secrets["client-secret"]
+        REDIRECT_URI = "http://localhost:3000"
+
+        cache_handler = CacheFileHandler(cache_path=XDG_CACHE_PATH)
+
+        sp_oauth = SpotifyOAuth(
+            client_id=client_id,
+            client_secret=client_secret,
+            redirect_uri=REDIRECT_URI,
+            scope="user-read-currently-playing",
+            cache_handler=cache_handler,
+        )
+
+        _auth_code = sp_oauth.get_auth_response()
+
+        _access_token = sp_oauth.get_access_token(_auth_code, as_dict=False)
+        refresh_token = sp_oauth.cache_handler.get_cached_token().get("refresh_token")
+
+        if os.path.exists(XDG_CACHE_PATH):
+            os.remove(XDG_CACHE_PATH)
+
+        return {"refresh_token": refresh_token}
+    except:
+        if os.path.exists(XDG_CACHE_PATH):
+            os.remove(XDG_CACHE_PATH)
+
+        return {
+            "error": "Couldn't fetch",
+            "description": "Make sure API tokens are valid",
+        }
