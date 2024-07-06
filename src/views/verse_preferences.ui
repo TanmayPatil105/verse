@@ -4,7 +4,6 @@
   <requires lib="libadwaita" version="1.0"/>
   <template class="VersePreferences" parent="AdwPreferencesDialog">
     <property name="content-height">500</property>
-    <property name="search-enabled">True</property>
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon_name">preferences-window-layout-symbolic</property>
@@ -34,7 +33,7 @@
                 <child>
                   <object class="GtkButton" id="refresh_token_button">
                     <property name="label" translatable="yes">Generate</property>
-                    <property name="tooltip-text">Generate Refresh token</property>
+                    <property name="tooltip-text">Generate Spotify refresh token</property>
                     <property name="sensitive">False</property>
                     <property name="margin-top">10</property>
                     <signal name="clicked" handler="refresh_token_button_pressed_cb"/>

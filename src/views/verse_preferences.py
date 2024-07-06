@@ -68,23 +68,34 @@ class VersePreferences(Adw.PreferencesDialog):
         genius_token = self.genius_token_row.get_text()
         update_secrets(genius_token=genius_token)
 
+    def token_generation_success(self, token):
+        self.refresh_token_button.set_label("Success")
+        self.refresh_token_button.remove_css_class("suggested-action")
+        self.refresh_token_button.add_css_class("success")
+        self.refresh_token_button.set_tooltip_text("Generated Succesfully!")
+        update_secrets(refresh_token=token)
+
+    def token_generation_failure(self, error):
+        self.refresh_token_button.remove_css_class("suggested-action")
+        self.refresh_token_button.add_css_class("error")
+        self.refresh_token_button.set_label("Error")
+        self.refresh_token_button.set_tooltip_text(error)
+
     def update_refresh_token(self):
         token = generate_refresh_token()
 
-        # FIXME: use Toasts to notify
         if "error" not in token:
-            self.refresh_token_button.set_sensitive(False)
-            self.refresh_token_button.set_label("Success")
-            self.refresh_token_button.remove_css_class("suggested-action")
-            self.refresh_token_button.add_css_class("success")
-            update_secrets(refresh_token=token["refresh_token"])
-            self.refresh_token_button.set_tooltip_text("Generated Succesfully!")
+            self.token_generation_success(token["refresh_token"])
         else:
-            self.refresh_token_button.set_sensitive(False)
-            self.refresh_token_button.remove_css_class("suggested-action")
-            self.refresh_token_button.add_css_class("error")
-            self.refresh_token_button.set_label("Error")
-            self.refresh_token_button.set_tooltip_text(token["description"])
+            self.token_generation_failure(token["description"])
+
+    def update_refresh_token_button(self):
+        self.refresh_token_button.remove_css_class("success")
+        self.refresh_token_button.remove_css_class("error")
+        self.refresh_token_button.add_css_class("suggested-action")
+        self.refresh_token_button.set_sensitive(True)
+        self.refresh_token_button.set_label("Generate")
+        self.refresh_token_button.set_tooltip_text("Generate Spotify refresh token")
 
     def update_widgets(self):
         secrets = retrieve_secrets()
@@ -105,12 +116,7 @@ class VersePreferences(Adw.PreferencesDialog):
         if secrets["genius-token"]:
             self.genius_token_row.set_text(secrets["genius-token"])
 
-        self.refresh_token_button.remove_css_class("success")
-        self.refresh_token_button.remove_css_class("error")
-        self.refresh_token_button.add_css_class("suggested-action")
-        self.refresh_token_button.set_sensitive(True)
-        self.refresh_token_button.set_label("Generate")
-        self.refresh_token_button.set_tooltip_text("Generate refresh token")
+        self.update_refresh_token_button()
 
     def open_wiki(self, button, url):
         GLib.spawn_command_line_async(f"xdg-open {url}")
