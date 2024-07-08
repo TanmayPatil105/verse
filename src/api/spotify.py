@@ -104,16 +104,20 @@ def get_now_playing_item():
     except:
         return {"error": "Uh-oh, smells like Ads", "description": "It'll pass.."}
 
-
 def generate_refresh_token():
-    XDG_CACHE_PATH = os.path.join(os.environ.get("XDG_CACHE_HOME"), ".cache")
+    if "XDG_CACHE_HOME" in os.environ:
+        CACHE_PATH = os.path.join(os.environ.get("XDG_CACHE_HOME"), ".cache")
+    else:
+        CACHE_PATH = "/tmp/.cache"
+
     try:
+        CACHE_PATH = os.path.join(os.environ.get("XDG_CACHE_HOME"), ".cache")
         secrets = retrieve_secrets()
         client_id = secrets["client-id"]
         client_secret = secrets["client-secret"]
         REDIRECT_URI = "http://localhost:3000"
 
-        cache_handler = CacheFileHandler(cache_path=XDG_CACHE_PATH)
+        cache_handler = CacheFileHandler(cache_path=CACHE_PATH)
 
         sp_oauth = SpotifyOAuth(
             client_id=client_id,
@@ -128,13 +132,13 @@ def generate_refresh_token():
         _access_token = sp_oauth.get_access_token(_auth_code, as_dict=False)
         refresh_token = sp_oauth.cache_handler.get_cached_token().get("refresh_token")
 
-        if os.path.exists(XDG_CACHE_PATH):
-            os.remove(XDG_CACHE_PATH)
+        if os.path.exists(CACHE_PATH):
+            os.remove(CACHE_PATH)
 
         return {"refresh_token": refresh_token}
     except:
-        if os.path.exists(XDG_CACHE_PATH):
-            os.remove(XDG_CACHE_PATH)
+        if os.path.exists(CACHE_PATH):
+            os.remove(CACHE_PATH)
 
         return {
             "error": "Couldn't fetch",
