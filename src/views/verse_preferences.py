@@ -50,13 +50,13 @@ class VersePreferences(Adw.PreferencesDialog):
     def client_id_row_applied_cb(self, widget, *args):
         client_id = self.client_id_row.get_text()
         update_secrets(client_id=client_id)
-        self.update_widgets()
+        self.validate_refresh_button_activation()
 
     @Gtk.Template.Callback()
     def client_secret_row_applied_cb(self, widget, *args):
         client_secret = self.client_secret_row.get_text()
         update_secrets(client_secret=client_secret)
-        self.update_widgets()
+        self.validate_refresh_button_activation()
 
     @Gtk.Template.Callback()
     def refresh_token_button_pressed_cb(self, widget, *args):
@@ -89,11 +89,22 @@ class VersePreferences(Adw.PreferencesDialog):
         else:
             self.token_generation_failure(token["description"])
 
-    def update_refresh_token_button(self):
+    def validate_refresh_button_activation(self):
+        secrets = retrieve_secrets()
+        if secrets is None:
+            return
+
+        self.update_refresh_token_button(secrets)
+
+    def update_refresh_token_button(self, secrets):
+        if secrets["client-id"] and secrets["client-secret"]:
+            self.refresh_token_button.set_sensitive(True)
+        else:
+            self.refresh_token_button.set_sensitive(False)
+
         self.refresh_token_button.remove_css_class("success")
         self.refresh_token_button.remove_css_class("error")
         self.refresh_token_button.add_css_class("suggested-action")
-        self.refresh_token_button.set_sensitive(True)
         self.refresh_token_button.set_label("Generate")
         self.refresh_token_button.set_tooltip_text("Generate Spotify refresh token")
 
@@ -108,15 +119,10 @@ class VersePreferences(Adw.PreferencesDialog):
         if secrets["client-secret"]:
             self.client_secret_row.set_text(secrets["client-secret"])
 
-        if secrets["client-id"] and secrets["client-secret"]:
-            self.refresh_token_button.set_sensitive(True)
-        else:
-            self.refresh_token_button.set_sensitive(False)
-
         if secrets["genius-token"]:
             self.genius_token_row.set_text(secrets["genius-token"])
 
-        self.update_refresh_token_button()
+        self.update_refresh_token_button(secrets)
 
     def open_wiki(self, button, url):
         GLib.spawn_command_line_async(f"xdg-open {url}")
