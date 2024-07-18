@@ -68,6 +68,9 @@ def sanitize_title(title):
     # Remove "(feat. #artist)"
     title = re.sub(r"\(feat. [^)]*\)", "", title)
 
+    # Remove "(From movie)"
+    title = re.sub(r"\(From [^)]*\)", "", title)
+
     # Remove "(with #artist)"
     title = re.sub(r"\(with [^)]*\)", "", title)
 
