@@ -46,5 +46,5 @@ def get_lyrics(song):
     except:
         return {
             "error": "Unable to fetch lyrics",
-            "description": "Please ensure that the GENIUS_TOKEN is valid in the Preferences.",
+            "description": "Please ensure that the Genius token is valid in the Preferences.",
         }
