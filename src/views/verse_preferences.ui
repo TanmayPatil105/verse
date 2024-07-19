@@ -36,7 +36,6 @@
                     <property name="tooltip-text">Generate Spotify refresh token</property>
                     <property name="sensitive">False</property>
                     <property name="margin-top">10</property>
-                    <signal name="clicked" handler="refresh_token_button_pressed_cb"/>
                     <style>
                       <class name="pill"/>
                       <class name="suggested-action"/>

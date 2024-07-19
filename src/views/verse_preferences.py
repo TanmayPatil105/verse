@@ -58,7 +58,6 @@ class VersePreferences(Adw.PreferencesDialog):
         update_secrets(client_secret=client_secret)
         self.validate_refresh_button_activation()
 
-    @Gtk.Template.Callback()
     def refresh_token_button_pressed_cb(self, widget, *args):
         self.refresh_token_button.set_label("Generating...")
         GLib.idle_add(self.update_refresh_token)
@@ -69,6 +68,7 @@ class VersePreferences(Adw.PreferencesDialog):
         update_secrets(genius_token=genius_token)
 
     def token_generation_success(self, token):
+        self.refresh_token_button.disconnect_by_func(self.refresh_token_button_pressed_cb)
         self.refresh_token_button.set_label("Success")
         self.refresh_token_button.remove_css_class("suggested-action")
         self.refresh_token_button.add_css_class("success")
@@ -99,6 +99,7 @@ class VersePreferences(Adw.PreferencesDialog):
     def update_refresh_token_button(self, secrets):
         if secrets["client-id"] and secrets["client-secret"]:
             self.refresh_token_button.set_sensitive(True)
+            self.refresh_token_button.connect("clicked", self.refresh_token_button_pressed_cb)
         else:
             self.refresh_token_button.set_sensitive(False)
 
