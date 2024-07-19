@@ -67,13 +67,11 @@ class VersePreferences(Adw.PreferencesDialog):
         genius_token = self.genius_token_row.get_text()
         update_secrets(genius_token=genius_token)
 
-    def token_generation_success(self, token):
-        self.refresh_token_button.disconnect_by_func(self.refresh_token_button_pressed_cb)
+    def token_generation_success(self):
         self.refresh_token_button.set_label("Success")
         self.refresh_token_button.remove_css_class("suggested-action")
         self.refresh_token_button.add_css_class("success")
         self.refresh_token_button.set_tooltip_text("Generated Succesfully!")
-        update_secrets(refresh_token=token)
 
     def token_generation_failure(self, error):
         self.refresh_token_button.remove_css_class("suggested-action")
@@ -85,21 +83,30 @@ class VersePreferences(Adw.PreferencesDialog):
         token = generate_refresh_token()
 
         if "error" not in token:
-            self.token_generation_success(token["refresh_token"])
+            self.token_generation_success()
+            update_secrets(refresh_token=token["refresh_token"])
         else:
             self.token_generation_failure(token["description"])
+            update_secrets(refresh_token=None)
+
+        self.refresh_token_button.disconnect_by_func(self.refresh_token_button_pressed_cb)
 
     def validate_refresh_button_activation(self):
         secrets = retrieve_secrets()
         if secrets is None:
             return
 
-        self.update_refresh_token_button(secrets)
+        self.update_refresh_token_button(secrets, token_changed=True)
 
-    def update_refresh_token_button(self, secrets):
+    def update_refresh_token_button(self, secrets, token_changed=False):
         if secrets["client-id"] and secrets["client-secret"]:
             self.refresh_token_button.set_sensitive(True)
-            self.refresh_token_button.connect("clicked", self.refresh_token_button_pressed_cb)
+
+            if not token_changed and secrets["refresh-token"]:
+                self.token_generation_success()
+                return
+            else:
+                self.refresh_token_button.connect("clicked", self.refresh_token_button_pressed_cb)
         else:
             self.refresh_token_button.set_sensitive(False)
 

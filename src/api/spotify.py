@@ -81,7 +81,7 @@ def get_now_playing_item():
     if not access_token:
         return {
             "error": "Unable to obtain access token.",
-            "description": "Please ensure that the CLIENT_ID and CLIENT_SECRET are valid in the Preferences.",
+            "description": "Please ensure that the Client ID and Client secret are valid in the Preferences.",
         }
 
     song = get_now_playing(access_token)
