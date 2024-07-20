@@ -25,6 +25,9 @@ def sanitize_lyrics(lyrics):
         start_pos = lyrics.find("Lyrics") + len("Lyrics")
         lyrics = lyrics[start_pos:]
 
+        # Genius API injects "You might also like" in lyrics
+        lyrics = re.sub(r"You might also like", "", lyrics)
+
         # Remove "Embed" present at the last
         end_pos = lyrics.rfind("Embed")
         sanitized = lyrics[:end_pos].strip() + "\n"
