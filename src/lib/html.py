@@ -47,7 +47,7 @@ def lyrics_to_html(lyrics, song):
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
         body {
-          font-family: 'Montserrat', sans-serif;
+          font-family: "Montserrat", sans-serif;
           background-color: %s;
           padding: 10px;
           text-align: center;
@@ -61,7 +61,7 @@ def lyrics_to_html(lyrics, song):
         }
 
         h1.artist {
-          font-size: 36px;
+          font-size: 30px;
           font-weight: bold;
           margin-bottom: 20px;
         }
@@ -81,11 +81,18 @@ def lyrics_to_html(lyrics, song):
           font-weight: 500;
           text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
+
+        hr {
+            color: %s;
+            margin:0 auto;
+            opacity: 0.5;
+        }
     </style>
     """ % (
         background_color,
         text_color,
         h2_color,
+        text_color
     )
 
     html = "<!DOCTYPE html>\n<html>\n<head>{}</head>\n<body>".format(styles)
@@ -95,6 +102,8 @@ def lyrics_to_html(lyrics, song):
     html += "<h1>{}</h1>\n".format(song["title"])
     artist = ", ".join([_artist["name"] for _artist in song["artists"]])
     html += '<h1 class="artist">by {}</h1>'.format(artist)
+
+    html += "<hr width=\"90%\">"
 
     for line in lines:
         if line.startswith("["):
