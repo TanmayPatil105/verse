@@ -49,8 +49,7 @@ class VerseApplication(Adw.Application):
         self.win.present()
 
     def on_about_action(self, widget, _):
-        about = Adw.AboutWindow(
-            transient_for=self.props.active_window,
+        about = Adw.AboutDialog(
             application_name="verse",
             application_icon="io.github.TanmayPatil105.verse",
             developer_name="Tanmay Patil",
@@ -59,7 +58,7 @@ class VerseApplication(Adw.Application):
             website="https://github.com/TanmayPatil105/verse",
             copyright="© 2024 Tanmay Patil",
         )
-        about.present()
+        about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):
         self.preferences_window = VersePreferences()
