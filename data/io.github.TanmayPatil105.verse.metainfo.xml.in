@@ -64,6 +64,18 @@
 			<caption>Lyrics of current playing song</caption>
 		</screenshot>
 		<screenshot>
+			<image type="source">https://raw.githubusercontent.com/TanmayPatil105/verse/main/images/verse-dark.png</image>
+			<caption>Works in Dark mode</caption>
+		</screenshot>
+		<screenshot>
+			<image type="source">https://raw.githubusercontent.com/TanmayPatil105/verse/main/images/verse-preferences.png</image>
+			<caption>Store API secrets</caption>
+		</screenshot>
+		<screenshot>
+			<image type="source">https://raw.githubusercontent.com/TanmayPatil105/verse/main/images/verse-adaptive.png</image>
+			<caption>Adaptive window</caption>
+		</screenshot>
+		<screenshot>
 			<image type="source">https://raw.githubusercontent.com/TanmayPatil105/verse/main/images/verse-paginated.png</image>
 			<caption>Paginated view displays previously played songs</caption>
 		</screenshot>
