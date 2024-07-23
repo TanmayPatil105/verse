@@ -65,13 +65,6 @@ class VerseWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_search_cb(self, button):
-        # activate refresh shortcut
-        self.add_shortcut(
-            Gtk.Shortcut.new(
-                Gtk.ShortcutTrigger.parse_string("<Control>r"),
-                Gtk.CallbackAction.new(self._refresh_cb),
-            )
-        )
         # call this on a separate thread
         self.fetch_details()
         self.refresh_button.set_visible(True)
@@ -80,10 +73,6 @@ class VerseWindow(Adw.ApplicationWindow):
     def on_refresh_cb(self, button):
         # call this on a separate thread
         self.fetch_details()
-
-    def _refresh_cb(self, widget=None, args=None):
-        self.fetch_details()
-        return True
 
     def song_unchanged(self, song):
         if self.song and song:
