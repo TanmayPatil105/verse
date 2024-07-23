@@ -68,11 +68,6 @@ class VerseWindow(Adw.ApplicationWindow):
         # call this on a separate thread
         self.fetch_details()
 
-    @Gtk.Template.Callback()
-    def on_refresh_cb(self, button):
-        # call this on a separate thread
-        self.fetch_details()
-
     def song_unchanged(self, song):
         if self.song and song:
             try:

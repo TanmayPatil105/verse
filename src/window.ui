@@ -16,7 +16,7 @@
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="visible">False</property>
-                <signal name="clicked" handler="on_refresh_cb"/>
+                <signal name="clicked" handler="on_search_cb"/>
               </object>
             </child>
             <child type="end">
