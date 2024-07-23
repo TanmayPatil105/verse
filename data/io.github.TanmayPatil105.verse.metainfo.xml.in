@@ -31,6 +31,17 @@
 	</branding>
 
 	<releases>
+	  <release version="0.1.5" date="2024-07-23">
+			<description>
+				<p>This release adds the following improvements:</p>
+				<ul>
+					<li>Better, Readable lyrics preview</li>
+					<li>Token generation workflow improvement</li>
+					<li>Fix refresh shortcut</li>
+					<li>Other minor fixes</li>
+				</ul>
+			</description>
+	  </release>
 	  <release version="0.1.3" date="2024-07-06">
 			<description>
 				<p>This release adds the following improvements:</p>
