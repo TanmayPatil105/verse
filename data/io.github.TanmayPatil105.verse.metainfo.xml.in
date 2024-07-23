@@ -25,6 +25,11 @@
 		</ul>
 	</description>
 
+	<branding>
+		<color type="primary" scheme_preference="light">#1f49e1</color>
+		<color type="primary" scheme_preference="dark">#1c6450</color>
+	</branding>
+
 	<releases>
 	  <release version="0.1.3" date="2024-07-06">
 			<description>
