@@ -67,7 +67,6 @@ class VerseWindow(Adw.ApplicationWindow):
     def on_search_cb(self, button):
         # call this on a separate thread
         self.fetch_details()
-        self.refresh_button.set_visible(True)
 
     @Gtk.Template.Callback()
     def on_refresh_cb(self, button):
@@ -134,6 +133,9 @@ class VerseWindow(Adw.ApplicationWindow):
         self.lyrics_view.set_visible(True)
 
     def fetch_details(self):
+        if self.refresh_button.get_visible() == False:
+            self.refresh_button.set_visible(True)
+
         self.box.set_valign(Gtk.Align.CENTER)
         self.status.set_title("Fetching song...")
         self.status.set_description(None)

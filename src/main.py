@@ -40,6 +40,8 @@ class VerseApplication(Adw.Application):
             "preferences", self.on_preferences_action, ["<primary>comma"]
         )
 
+        self.create_action("refresh", self.on_refresh_action, ["<primary>r"])
+
         setup_secrets()
 
     def do_activate(self):
@@ -63,6 +65,9 @@ class VerseApplication(Adw.Application):
     def on_preferences_action(self, widget, _):
         self.preferences_window = VersePreferences()
         self.preferences_window.present()
+
+    def on_refresh_action(self, widget, _):
+        self.win.fetch_details()
 
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
