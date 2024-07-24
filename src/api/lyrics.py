@@ -22,19 +22,14 @@ from ..lib.secrets import retrieve_secrets
 from ..lib.utils import sanitize_title
 
 
-def get_lyrics(song):
+def get_lyrics(song_title, artist_name):
     try:
         secrets = retrieve_secrets()
         genius_token = secrets["genius-token"]
         genius = lyricsgenius.Genius(genius_token, verbose=False)
 
-        title = sanitize_title(song["title"])
-
-        for artist in song["artists"]:
-            artist_name = artist["name"]
-            song = genius.search_song(title, artist_name)
-            if song:
-                break
+        title = sanitize_title(song_title)
+        song = genius.search_song(title, artist_name)
 
         if not song:
             return {

@@ -108,16 +108,19 @@ class VerseWindow(Adw.ApplicationWindow):
                 GLib.idle_add(self.status.set_title, "Song is Paused!")
                 GLib.idle_add(self.status.set_description, "Here's the lyrics anyway..")
 
-            # fetch lyrics
-            lyrics = get_lyrics(song)
+            for artist in song["artists"]:
+                lyrics = get_lyrics (song["title"], artist["name"])
+                if "error" not in lyrics:
+                    # we found a lyrics
+                    self.song = song
+                    self.lyrics = sanitize_lyrics(lyrics["lyrics"])
+                    GLib.idle_add(self.display_lyrics)
+                    return
 
-            if "error" not in lyrics:
-                self.song = song
-                self.lyrics = sanitize_lyrics(lyrics["lyrics"])
-                GLib.idle_add(self.display_lyrics)
-            else:
-                GLib.idle_add(self.status.set_title, lyrics["error"])
-                GLib.idle_add(self.status.set_description, lyrics["description"])
+            # we couldn't find any lyrics
+            GLib.idle_add(self.status.set_title, lyrics["error"])
+            GLib.idle_add(self.status.set_description, lyrics["description"])
+
         else:
             GLib.idle_add(self.status.set_title, song["error"])
             GLib.idle_add(self.status.set_description, song["description"])
