@@ -55,10 +55,10 @@ class VerseApplication(Adw.Application):
             application_name="verse",
             application_icon="io.github.TanmayPatil105.verse",
             developer_name="Tanmay Patil",
-            version="0.1.5",
+            version="0.1.6",
             developers=["Tanmay Patil"],
             website="https://github.com/TanmayPatil105/verse",
-            copyright="© 2024 Tanmay Patil",
+            copyright="© 2025 Tanmay Patil",
         )
         about.present(self.props.active_window)
 
