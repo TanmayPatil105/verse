@@ -115,7 +115,7 @@ def generate_refresh_token():
         secrets = retrieve_secrets()
         client_id = secrets["client-id"]
         client_secret = secrets["client-secret"]
-        REDIRECT_URI = "http://localhost:3000"
+        REDIRECT_URI = "http://127.0.0.1:3000"
 
         cache_handler = CacheFileHandler(cache_path=CACHE_PATH)
 
