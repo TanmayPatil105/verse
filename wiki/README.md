@@ -3,7 +3,7 @@
 ## Spotify
 - Go to your [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
 - Create an App.
-- Fill out the `name` and `description`, and set the `redirect URI` to `http://localhost:3000`. Click `create`.
+- Fill out the `name` and `description`, and set the `redirect URI` to `http://127.0.0.1:3000`. Click `create`.
 - Under `Settings`, Click `Show Client Secret`.
 
 Now, we have our Spotify `Client ID` and `Client SECRET`.

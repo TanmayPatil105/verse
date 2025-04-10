@@ -1,6 +1,6 @@
 # spotify.py
 #
-# Copyright 2024 Tanmay Patil <tanmaynpatil105@gmail.com>
+# Copyright 2024-2025 Tanmay Patil <tanmaynpatil105@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -115,7 +115,7 @@ def generate_refresh_token():
         secrets = retrieve_secrets()
         client_id = secrets["client-id"]
         client_secret = secrets["client-secret"]
-        REDIRECT_URI = "http://localhost:3000"
+        REDIRECT_URI = "http://127.0.0.1:3000"
 
         cache_handler = CacheFileHandler(cache_path=CACHE_PATH)
 
