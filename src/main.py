@@ -1,6 +1,6 @@
 # main.py
 #
-# Copyright 2024 Tanmay Patil <tanmaynpatil105@gmail.com>
+# Copyright 2024-2025 Tanmay Patil <tanmaynpatil105@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ class VerseApplication(Adw.Application):
             application_name="verse",
             application_icon="io.github.TanmayPatil105.verse",
             developer_name="Tanmay Patil",
-            version="0.1.6",
+            version="0.1.7",
             developers=["Tanmay Patil"],
             website="https://github.com/TanmayPatil105/verse",
             copyright="© 2025 Tanmay Patil",
