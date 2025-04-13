@@ -31,6 +31,15 @@
 	</branding>
 
 	<releases>
+		<release version="0.1.7" date="2025-04-14">
+			<description>
+				<p>This release adds the following improvements:</p>
+				<ul>
+					<li>Fix redirect URI for spotify authentication</li>
+					<li>Update dependencies</li>
+				</ul>
+			</description>
+	  </release>
 	  <release version="0.1.6" date="2025-01-02">
 			<description>
 				<p>This release adds the following improvements:</p>
