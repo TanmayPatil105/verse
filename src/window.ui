@@ -10,6 +10,14 @@
         <child type="top">
           <object class="AdwHeaderBar" id="header_bar">
             <child type="start">
+              <object class="GtkMenuButton">
+                <property name="primary">True</property>
+                <property name="icon-name">open-menu-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Menu</property>
+                <property name="menu-model">primary_menu</property>
+              </object>
+            </child>
+            <child type="start">
               <object class="GtkButton" id="refresh_button">
                 <property name="icon-name">view-refresh-symbolic</property>
                 <property name="tooltip-text" translatable="yes">Refresh</property>
@@ -17,14 +25,6 @@
                 <property name="valign">center</property>
                 <property name="visible">False</property>
                 <signal name="clicked" handler="on_search_cb"/>
-              </object>
-            </child>
-            <child type="end">
-              <object class="GtkMenuButton">
-                <property name="primary">True</property>
-                <property name="icon-name">open-menu-symbolic</property>
-                <property name="tooltip-text" translatable="yes">Menu</property>
-                <property name="menu-model">primary_menu</property>
               </object>
             </child>
           </object>
