@@ -31,6 +31,15 @@
 	</branding>
 
 	<releases>
+	  <release version="0.1.8" date="2025-05-26">
+			<description>
+				<p>This release adds the following improvements:</p>
+				<ul>
+					<li>Improved window layout</li>
+					<li>Enhanced lyrics sanitizer</li>
+				</ul>
+			</description>
+	  </release>
 		<release version="0.1.7" date="2025-04-14">
 			<description>
 				<p>This release adds the following improvements:</p>
