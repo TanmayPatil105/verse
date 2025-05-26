@@ -19,11 +19,18 @@
 
 import re
 
+def strip_before_marker(lyrics, marker):
+    marker_pos = lyrics.find(marker)
+    if marker_pos == -1:
+        return lyrics
+    return lyrics[marker_pos + len(marker):]
+
 def sanitize_lyrics(lyrics):
     try:
-        # Remove till "Lyrics" from fetched lyrics
-        start_pos = lyrics.find("Lyrics") + len("Lyrics")
-        lyrics = lyrics[start_pos:]
+        markers = [ "Lyrics", "Read More"]
+
+        for marker in markers:
+            lyrics = strip_before_marker(lyrics, marker)
 
         # Genius API injects "You might also like" in lyrics
         lyrics = re.sub(r"You might also like", "", lyrics)
